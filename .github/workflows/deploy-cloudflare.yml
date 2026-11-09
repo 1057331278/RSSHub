@@ -16,16 +16,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20 # 切换到生产环境最稳定的 Node 20 LTS
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
-      - name: Build RSSHub for Worker
-        run: pnpm run worker-build
+      - name: Build and Deploy
+        env:
+          # 开启 Node 的模块兼容模式，防止 CommonJS/ESM 具名导出丢失
+          NODE_OPTIONS: "--experimental-default-type=module"
+        run: pnpm worker-build
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
