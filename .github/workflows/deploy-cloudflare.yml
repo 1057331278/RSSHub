@@ -1,10 +1,10 @@
 name: Deploy to Cloudflare Workers
 
 on:
-  workflow_dispatch: # 允许在 GitHub 网页手动点击触发
+  workflow_dispatch:
   push:
     branches:
-      - master # 当向 master 推送或同步更新时自动触发
+      - master
 
 jobs:
   deploy:
@@ -22,10 +22,10 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build RSSHub for Worker
-        run: pnpm build:worker
+        run: pnpm run worker-build
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
