@@ -40,7 +40,7 @@ new_sqlite_classes = ["BrowserSession"]
 
 # KV namespace for caching (auto-provisioned on first deploy)
 [[kv_namespaces]]
-binding = "CACHE"
+binding = "217be831b40147bda248da911a30b78d"
 
 # PLAYWRIGHT_WS_ENDPOINT takes priority over BROWSER; use a matching Playwright version.
 # Optional service binding when the WebSocket server is another Worker on this account.
